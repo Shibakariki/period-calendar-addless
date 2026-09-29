@@ -27,17 +27,17 @@ const SELECT = `
 `;
 
 // Triés du plus ancien au plus récent (pratique pour les calculs)
-export async function getAllCycles(): Promise<Cycle[]> {
+export async function getAllCyclesInDb(): Promise<Cycle[]> {
   const db = await getDb();
   return db.getAllAsync<Cycle>(`${SELECT} ORDER BY start_date ASC`);
 }
 
-export async function getCycleById(id: number): Promise<Cycle | null> {
+export async function getCycleByIdInDb(id: number): Promise<Cycle | null> {
   const db = await getDb();
   return db.getFirstAsync<Cycle>(`${SELECT} WHERE id = ?`, [id]);
 }
 
-export async function addCycle(c: NewCycle): Promise<number> {
+export async function addCycleInDb(c: NewCycle): Promise<number> {
   validate(c);
   const db = await getDb();
   const result = await db.runAsync(
@@ -47,7 +47,7 @@ export async function addCycle(c: NewCycle): Promise<number> {
   return result.lastInsertRowId;
 }
 
-export async function updateCycle(cycle: Cycle): Promise<void> {
+export async function updateCycleInDb(cycle: Cycle): Promise<void> {
   validate(cycle);
   const db = await getDb();
   await db.runAsync(
@@ -56,12 +56,12 @@ export async function updateCycle(cycle: Cycle): Promise<void> {
   );
 }
 
-export async function deleteCycle(id: number): Promise<void> {
+export async function deleteCycleInDb(id: number): Promise<void> {
   const db = await getDb();
   await db.runAsync('DELETE FROM cycles WHERE id = ?', [id]);
 }
 
-export async function resetCycles(): Promise<void> {
+export async function resetCyclesInDb(): Promise<void> {
   const db = await getDb();
   await db.runAsync('DELETE FROM cycles');
 }

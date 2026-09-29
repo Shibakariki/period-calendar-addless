@@ -3,8 +3,9 @@ import { useTheme } from '@/hooks/use-theme';
 import { useEffect, useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { Calendar } from 'react-native-calendars';
-import { addCycle, getAllCycles } from '../db/cycles';
+import { addCycleInDb, deleteCycleInDb, getAllCyclesInDb } from '../db/cycles';
 import type { Cycle } from '../db/types';
+import { ThemedButton } from './themed-button';
 import { ThemedText } from './themed-text';
 export default function TestCycles() {
   const theme = useTheme();
@@ -12,15 +13,22 @@ export default function TestCycles() {
 
   useEffect(() => {
     (async () => {
-        let list = await getAllCycles();
+        let list = await getAllCyclesInDb();
         if (list.length === 0) {
-            await addCycle({ startDate: '2026-09-01',endDate: null, notes: null });
-            await addCycle({ startDate: '2026-09-27',endDate: '2026-10-02', notes: null });
-            list = await getAllCycles();
+            await addCycleInDb({ startDate: '2026-09-01',endDate: null, notes: null });
+            await addCycleInDb({ startDate: '2026-09-27',endDate: '2026-10-02', notes: null });
+            list = await getAllCyclesInDb();
         }
       setCycles(list);
     })().catch(console.error);
   }, []);
+
+  const deleteCycle = async (cycle: Cycle) => {
+    await deleteCycleInDb(cycle.id)  
+    setCycles(cycles.filter(c => c !== cycle));
+    setSelectedCycle(null);
+    setSelectedDate(null);
+  };
 
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
 
@@ -83,7 +91,17 @@ export default function TestCycles() {
             style={styles.selectedCycleView}
         >
             {selectedCycle ? (
-                <ThemedText>Selected Cycle: {selectedCycle.startDate} - {selectedCycle.endDate ?? 'Ongoing'}</ThemedText>
+                <>
+                    <ThemedText>Selected Cycle: {selectedCycle.startDate} - {selectedCycle.endDate ?? 'Ongoing'}</ThemedText>
+                    <ThemedButton
+                        label="Delete Cycle"
+                        type="secondary"
+                        onPress={() => {
+                            if (selectedCycle) {
+                                deleteCycle(selectedCycle);
+                            }
+                        }}/>
+                    </>
             ) : (
                 <ThemedText>No cycle selected</ThemedText>
             )}
