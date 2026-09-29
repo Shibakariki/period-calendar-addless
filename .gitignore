@@ -1,0 +1,6 @@
+.claude
+.vscode
+package-lock.json
+node_modules
+
+expo-env.d.ts
