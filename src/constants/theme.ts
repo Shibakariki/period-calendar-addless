@@ -14,6 +14,10 @@ export const Colors = {
     backgroundElement: '#F0F0F3',
     backgroundSelected: '#E0E1E6',
     textSecondary: '#60646C',
+    dateSelection: '#ebd5484c',
+    dateRegistered: '#ead861',
+    dateProjection: '#f2a136',
+    textInDate: '#0000004d',
   },
   dark: {
     text: '#ffffff',
@@ -21,6 +25,11 @@ export const Colors = {
     backgroundElement: '#212225',
     backgroundSelected: '#2E3135',
     textSecondary: '#B0B4BA',
+    dateSelection: '#ebd5484c',
+    dateRegistered: '#ead861',
+    dateProjection: '#f2a136',
+    textInDate: '#0000004d',
+    
   },
 } as const;
 
