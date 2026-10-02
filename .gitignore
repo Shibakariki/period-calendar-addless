@@ -1,5 +1,6 @@
 .claude
 .vscode
+.expo
 package-lock.json
 node_modules
 

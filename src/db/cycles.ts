@@ -37,6 +37,12 @@ export async function getCycleByIdInDb(id: number): Promise<Cycle | null> {
   return db.getFirstAsync<Cycle>(`${SELECT} WHERE id = ?`, [id]);
 }
 
+export async function isCycleByIdInDb(id: number): Promise<boolean | null> {
+  const db = await getDb();
+  const cycle = await db.getFirstAsync<Cycle>(`${SELECT} WHERE id = ?`, [id]);
+  return cycle ? true : false;
+}
+
 export async function addCycleInDb(c: NewCycle): Promise<number> {
   validate(c);
   const db = await getDb();

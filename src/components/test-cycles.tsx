@@ -1,9 +1,9 @@
 import { ThemedView } from '@/components/themed-view';
 import { useTheme } from '@/hooks/use-theme';
 import { useEffect, useState } from 'react';
-import { StyleSheet } from 'react-native';
+import { Modal, StyleSheet, TextInput, View } from 'react-native';
 import { Calendar } from 'react-native-calendars';
-import { addCycleInDb, deleteCycleInDb, getAllCyclesInDb } from '../db/cycles';
+import { addCycleInDb, deleteCycleInDb, getAllCyclesInDb, updateCycleInDb } from '../db/cycles';
 import type { Cycle } from '../db/types';
 import { ThemedButton } from './themed-button';
 import { ThemedText } from './themed-text';
@@ -13,10 +13,11 @@ export default function TestCycles() {
 
   useEffect(() => {
     (async () => {
+        // await resetCyclesInDb();
         let list = await getAllCyclesInDb();
         if (list.length === 0) {
-            await addCycleInDb({ startDate: '2026-09-01',endDate: null, notes: null });
-            await addCycleInDb({ startDate: '2026-09-27',endDate: '2026-10-02', notes: null });
+            await addCycleInDb({ startDate: '2026-10-01',endDate: "2026-10-03", notes: null });
+            await addCycleInDb({ startDate: '2026-10-19',endDate: null, notes: null });
             list = await getAllCyclesInDb();
         }
       setCycles(list);
@@ -30,9 +31,41 @@ export default function TestCycles() {
     setSelectedDate(null);
   };
 
-  const [selectedDate, setSelectedDate] = useState<string | null>(null);
+  const AddOrUpdateCycle = async () => {
+    console.log('AddOrUpdateCycle called with:', { formId, formStartDate, formEndDate, formNotes });
+    if (!formStartDate) return;
+    if (formId) {
+        await updateCycleInDb({ id: formId, startDate: formStartDate, endDate: formEndDate || null, notes: formNotes || null });
+        setModalVisible(false);
+    }
+    else {
+        await addCycleInDb({ startDate: formStartDate, endDate: formEndDate || null, notes: formNotes || null });
+    }
+    setModalVisible(false);
+    const list = await getAllCyclesInDb();
+    setCycles(list);
+    if (formId) {
+      setSelectedCycle(list.find(c => c.id === formId) ?? null);
+    }
+    return;
+  };
 
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedCycle, setSelectedCycle] = useState<Cycle | null>(null);
+
+  const [modalVisible, setModalVisible] = useState(false);
+  const [formId, setFormId] = useState<number | null>(null);
+  const [formStartDate, setFormStartDate] = useState('');
+  const [formEndDate, setFormEndDate] = useState('');
+  const [formNotes, setFormNotes] = useState('');
+
+  const openModal = () => {
+    setFormId(selectedCycle?.id ?? null);
+    setFormStartDate(selectedCycle?.startDate ?? selectedDate ?? '');
+    setFormEndDate(selectedCycle?.endDate ?? '');
+    setFormNotes(selectedCycle?.notes ?? '');
+    setModalVisible(true);
+  };
 
   return (
     <ThemedView style={styles.view}>
@@ -92,7 +125,18 @@ export default function TestCycles() {
         >
             {selectedCycle ? (
                 <>
-                    <ThemedText>Selected Cycle: {selectedCycle.startDate} - {selectedCycle.endDate ?? 'Ongoing'}</ThemedText>
+                    <ThemedText>
+                        Selected Cycle: {selectedCycle.startDate} - {selectedCycle.endDate ?? 'Ongoing'}
+                    </ThemedText>
+                    <ThemedText type="small" themeColor="textSecondary">
+                        Notes: {selectedCycle.notes ?? 'Empty'}
+                    </ThemedText>
+                    <ThemedButton 
+                        label="Modify Cycle" 
+                        type="primary" 
+                        onPress={openModal} 
+                    />
+                    
                     <ThemedButton
                         label="Delete Cycle"
                         type="secondary"
@@ -100,12 +144,57 @@ export default function TestCycles() {
                             if (selectedCycle) {
                                 deleteCycle(selectedCycle);
                             }
-                        }}/>
-                    </>
+                        }}
+                    />
+                </>
             ) : (
-                <ThemedText>No cycle selected</ThemedText>
+                <>
+                    <ThemedText>No cycle selected</ThemedText>
+                    <ThemedButton 
+                        label="Add Cycle" 
+                        type="primary" 
+                        onPress={openModal} 
+                    />
+                </>
             )}
+
         </ThemedView>
+
+        <Modal visible={modalVisible} transparent animationType="fade" onRequestClose={() => setModalVisible(false)}>
+            <View style={styles.overlay}>
+                <ThemedView style={styles.modal}>
+                    <ThemedText type="subtitle">New Cycle</ThemedText>
+                    <ThemedText type="small" themeColor="textSecondary">Start date (YYYY-MM-DD)</ThemedText>
+                    <TextInput
+                        style={[styles.input, { color: theme.text, borderColor: theme.backgroundSelected }]}
+                        placeholderTextColor={theme.textSecondary}
+                        placeholder="2027-01-01"
+                        value={formStartDate}
+                        onChangeText={setFormStartDate}
+                    />
+                    <ThemedText type="small" themeColor="textSecondary">End date (optional)</ThemedText>
+                    <TextInput
+                        style={[styles.input, { color: theme.text, borderColor: theme.backgroundSelected }]}
+                        placeholderTextColor={theme.textSecondary}
+                        placeholder="2027-01-28"
+                        value={formEndDate}
+                        onChangeText={setFormEndDate}
+                    />
+                    <ThemedText type="small" themeColor="textSecondary">Notes (optional)</ThemedText>
+                    <TextInput
+                        style={[styles.input, { color: theme.text, borderColor: theme.backgroundSelected }]}
+                        placeholderTextColor={theme.textSecondary}
+                        placeholder="..."
+                        value={formNotes}
+                        onChangeText={setFormNotes}
+                    />
+                    <View style={styles.modalActions}>
+                        <ThemedButton label="Cancel" type="ghost" onPress={() => setModalVisible(false)} />
+                        <ThemedButton label="Add" type="primary" onPress={AddOrUpdateCycle} />
+                    </View>
+                </ThemedView>
+            </View>
+        </Modal>
     </ThemedView>
   );
 }
@@ -126,5 +215,33 @@ const styles = StyleSheet.create({
         borderColor: '#e0e0e0',
         borderRadius: 10,
         overflow: 'hidden',
+    },
+    overlay: {
+        flex: 1,
+        backgroundColor: '#00000066',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 24,
+    },
+    modal: {
+        width: '100%',
+        maxWidth: 400,
+        borderRadius: 12,
+        padding: 24,
+        gap: 8,
+    },
+    input: {
+        borderWidth: 1,
+        borderRadius: 8,
+        paddingHorizontal: 12,
+        paddingVertical: 8,
+        fontSize: 14,
+        marginBottom: 4,
+    },
+    modalActions: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        gap: 8,
+        marginTop: 8,
     },
 });
