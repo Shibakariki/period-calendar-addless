@@ -1,7 +1,7 @@
 .claude
 .vscode
 .expo
+.expo/dev/logs/start.log
 package-lock.json
 node_modules
-
 expo-env.d.ts

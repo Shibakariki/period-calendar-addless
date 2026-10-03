@@ -16,7 +16,7 @@ export const Colors = {
     textSecondary: '#60646C',
     dateSelection: '#ebd5484c',
     dateRegistered: '#ead861',
-    dateProjection: '#f2a136',
+    datePredicted: '#f2a136',
     textInDate: '#0000004d',
   },
   dark: {
@@ -27,7 +27,7 @@ export const Colors = {
     textSecondary: '#B0B4BA',
     dateSelection: '#ebd5484c',
     dateRegistered: '#ead861',
-    dateProjection: '#f2a136',
+    datePredicted: '#f2a136',
     textInDate: '#0000004d',
     
   },

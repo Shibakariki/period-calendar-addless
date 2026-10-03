@@ -22,13 +22,19 @@ function validate(c: NewCycle) {
 }
 
 const SELECT = `
-  SELECT id, start_date AS startDate, end_date AS endDate, notes
+  SELECT id, start_date AS startDate, end_date AS endDate, notes, predicted_cycle_time AS predictedCycleTime
   FROM cycles
 `;
 
 // Triés du plus ancien au plus récent (pratique pour les calculs)
 export async function getAllCyclesInDb(): Promise<Cycle[]> {
   const db = await getDb();
+  if (!db) {
+    throw new Error('Database not available');
+  }
+
+  console.log('Fetching all cycles from the database');
+  console.log('Cycles :', await db.getAllAsync<Cycle>(SELECT));
   return db.getAllAsync<Cycle>(`${SELECT} ORDER BY start_date ASC`);
 }
 
@@ -47,8 +53,8 @@ export async function addCycleInDb(c: NewCycle): Promise<number> {
   validate(c);
   const db = await getDb();
   const result = await db.runAsync(
-    'INSERT INTO cycles (start_date, end_date, notes) VALUES (?, ?, ?)',
-    [c.startDate, c.endDate, c.notes]
+    'INSERT INTO cycles (start_date, end_date, notes, predicted_cycle_time) VALUES (?, ?, ?, ?)',
+    [c.startDate, c.endDate, c.notes, c.predictedCycleTime]
   );
   return result.lastInsertRowId;
 }
@@ -57,8 +63,8 @@ export async function updateCycleInDb(cycle: Cycle): Promise<void> {
   validate(cycle);
   const db = await getDb();
   await db.runAsync(
-    'UPDATE cycles SET start_date = ?, end_date = ?, notes = ? WHERE id = ?',
-    [cycle.startDate, cycle.endDate, cycle.notes, cycle.id]
+    'UPDATE cycles SET start_date = ?, end_date = ?, notes = ?, predicted_cycle_time = ? WHERE id = ?',
+    [cycle.startDate, cycle.endDate, cycle.notes, cycle.predictedCycleTime, cycle.id]
   );
 }
 
