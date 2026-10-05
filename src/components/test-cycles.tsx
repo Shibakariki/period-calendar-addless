@@ -88,27 +88,24 @@ export default function TestCycles() {
   const makeMarkedDates = () => {
     const acc = cycles.reduce((acc, cycle) => {
         const start = new Date(cycle.startDate);
-        var end = null;
-        var current = null;
-        var color: string = theme.dateRegistered;
-        if (cycle.endDate) {
-            end = new Date(cycle.endDate);
-            current = new Date(start);
-        } else {
-            end = new Date(start);
-            end.setDate(end.getDate() + cycle.predictedCycleTime);
-            current = new Date(start);
-            current.setDate(current.getDate());
-            color = theme.datePredicted;
+        const isPredicted = !cycle.endDate;
+        const endDate = isPredicted
+          ? new Date(start)
+          : new Date(cycle.endDate!);
+
+        if (isPredicted) {
+          endDate.setDate(endDate.getDate() + (cycle.predictedCycleTime || 1));
         }
-        while (current <= end) {
+
+        let current = new Date(start);
+        while (current <= endDate) {
             const dateStr = current.toISOString().split('T')[0];
             const isStart = dateStr === cycle.startDate;
-            const isEnd = dateStr === (cycle.endDate);
+            const isEnd = Boolean(cycle.endDate ? dateStr === cycle.endDate : dateStr === endDate.toISOString().split('T')[0]);
             acc[dateStr] = {
                 startingDay: isStart,
                 endingDay: isEnd,
-                color: color,
+                color: isPredicted && !isStart ? theme.datePredicted : theme.dateRegistered,
             };
             current.setDate(current.getDate() + 1);
         }
@@ -196,7 +193,11 @@ export default function TestCycles() {
                 const selected = cycles.find(cycle => {
                     const date = day.dateString;
                     const start = cycle.startDate;
-                    const end = cycle.endDate ?? cycle.startDate;
+                    const end = cycle.endDate ?? (() => {
+                        const computedEnd = new Date(cycle.startDate);
+                        computedEnd.setDate(computedEnd.getDate() + (cycle.predictedCycleTime || 1));
+                        return computedEnd.toISOString().split('T')[0];
+                    })();
                     return date >= start && date <= end;
                 });
                 setSelectedCycle(selected ?? null);

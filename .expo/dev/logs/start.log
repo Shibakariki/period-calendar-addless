@@ -788,3 +788,196 @@
 {"_e":"metro:client_log","_t":1791046795924,"level":"log","data":["[DB] cycles table reset"]}
 {"_e":"metro:client_log","_t":1791046798511,"level":"log","data":["Fetching all cycles from the database"]}
 {"_e":"metro:client_log","_t":1791046798621,"level":"log","data":["Cycles :","[{\"endDate\": null, \"id\": 6, \"notes\": null, \"predictedCycleTime\": 2, \"startDate\": \"2026-10-19\"}]"]}
+{"_e":"metro:bundling:started","_t":1791197925274,"id":"b","platform":"android","environment":null,"entry":"node_modules/expo-router/entry.js"}
+{"_e":"metro:bundling:progress","_t":1791197925275,"id":"b","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1791197925369,"id":"b","total":1,"ms":94.715083}
+{"_e":"metro:client_log","_t":1791197933571,"level":"log","data":["Current database version: 1"]}
+{"_e":"metro:client_log","_t":1791197933578,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1791197933598,"level":"log","data":["Cycles :","[{\"endDate\": null, \"id\": 6, \"notes\": null, \"predictedCycleTime\": 2, \"startDate\": \"2026-10-19\"}]"]}
+{"_e":"metro:bundling:started","_t":1791198166924,"id":"g","platform":"android","environment":null,"entry":"node_modules/expo-router/entry.js"}
+{"_e":"metro:bundling:progress","_t":1791198166924,"id":"g","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1791198166929,"id":"g","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1791198167096,"id":"g","total":1,"ms":172.645042}
+{"_e":"metro:client_log","_t":1791198173873,"level":"log","data":["Current database version: 1"]}
+{"_e":"metro:client_log","_t":1791198173882,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1791198173891,"level":"log","data":["Cycles :","[]"]}
+{"_e":"metro:client_log","_t":1791198211015,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1791198211150,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-10-23\", \"id\": 1, \"notes\": null, \"predictedCycleTime\": 4, \"startDate\": \"2026-10-19\"}]"]}
+{"_e":"metro:client_log","_t":1791198219158,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1791198219300,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-10-23\", \"id\": 1, \"notes\": null, \"predictedCycleTime\": 4, \"startDate\": \"2026-10-19\"}, {\"endDate\": null, \"id\": 2, \"notes\": null, \"predictedCycleTime\": 2, \"startDate\": \"2026-10-12\"}]"]}
+{"_e":"metro:client_log","_t":1791198256389,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1791198256396,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-10-23\", \"id\": 1, \"notes\": null, \"predictedCycleTime\": 4, \"startDate\": \"2026-10-19\"}, {\"endDate\": null, \"id\": 2, \"notes\": null, \"predictedCycleTime\": 2, \"startDate\": \"2026-10-12\"}]"]}
+{"_e":"metro:bundling:started","_t":1791198263403,"id":"h","platform":"android","environment":null,"entry":"node_modules/expo-router/entry.js"}
+{"_e":"metro:bundling:progress","_t":1791198263403,"id":"h","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1791198263494,"id":"h","total":1,"ms":90.455}
+{"_e":"metro:client_log","_t":1791198270592,"level":"log","data":["Current database version: 1"]}
+{"_e":"metro:client_log","_t":1791198270599,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1791198270637,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-10-23\", \"id\": 1, \"notes\": null, \"predictedCycleTime\": 4, \"startDate\": \"2026-10-19\"}, {\"endDate\": null, \"id\": 2, \"notes\": null, \"predictedCycleTime\": 2, \"startDate\": \"2026-10-12\"}]"]}
+{"_e":"metro:client_log","_t":1791198297238,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1791198297245,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-10-23\", \"id\": 1, \"notes\": null, \"predictedCycleTime\": 4, \"startDate\": \"2026-10-19\"}, {\"endDate\": null, \"id\": 2, \"notes\": null, \"predictedCycleTime\": 2, \"startDate\": \"2026-10-12\"}]"]}
+{"_e":"metro:bundling:started","_t":1791198314745,"id":"i","platform":"android","environment":null,"entry":"node_modules/expo-router/entry.js"}
+{"_e":"metro:bundling:progress","_t":1791198314745,"id":"i","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1791198314833,"id":"i","total":1,"ms":87.887917}
+{"_e":"metro:client_log","_t":1791198322285,"level":"log","data":["Current database version: 1"]}
+{"_e":"metro:client_log","_t":1791198322293,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1791198322345,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-10-23\", \"id\": 1, \"notes\": null, \"predictedCycleTime\": 4, \"startDate\": \"2026-10-19\"}, {\"endDate\": null, \"id\": 2, \"notes\": null, \"predictedCycleTime\": 2, \"startDate\": \"2026-10-12\"}]"]}
+{"_e":"metro:client_log","_t":1791198331445,"level":"log","data":["[DEBUG] Processing date: 2026-10-12, isStart: true, isEnd: false, isPredicted: true"]}
+{"_e":"metro:client_log","_t":1791198331451,"level":"log","data":["[DEBUG] Processing date: 2026-10-13, isStart: false, isEnd: false, isPredicted: true"]}
+{"_e":"metro:client_log","_t":1791198331451,"level":"log","data":["[DEBUG] Processing date: 2026-10-14, isStart: false, isEnd: false, isPredicted: true"]}
+{"_e":"metro:client_log","_t":1791198331452,"level":"log","data":["[DEBUG] Processing date: 2026-10-19, isStart: true, isEnd: false, isPredicted: false"]}
+{"_e":"metro:client_log","_t":1791198331452,"level":"log","data":["[DEBUG] Processing date: 2026-10-20, isStart: false, isEnd: false, isPredicted: false"]}
+{"_e":"metro:client_log","_t":1791198331452,"level":"log","data":["[DEBUG] Processing date: 2026-10-21, isStart: false, isEnd: false, isPredicted: false"]}
+{"_e":"metro:client_log","_t":1791198331452,"level":"log","data":["[DEBUG] Processing date: 2026-10-22, isStart: false, isEnd: false, isPredicted: false"]}
+{"_e":"metro:client_log","_t":1791198331452,"level":"log","data":["[DEBUG] Processing date: 2026-10-23, isStart: false, isEnd: true, isPredicted: false"]}
+{"_e":"metro:client_log","_t":1791198331575,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1791198331581,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-10-23\", \"id\": 1, \"notes\": null, \"predictedCycleTime\": 4, \"startDate\": \"2026-10-19\"}, {\"endDate\": null, \"id\": 2, \"notes\": null, \"predictedCycleTime\": 2, \"startDate\": \"2026-10-12\"}]"]}
+{"_e":"metro:client_log","_t":1791198331581,"level":"log","data":["[DEBUG] Processing date: 2026-10-12, isStart: true, isEnd: false, isPredicted: true"]}
+{"_e":"metro:client_log","_t":1791198331581,"level":"log","data":["[DEBUG] Processing date: 2026-10-13, isStart: false, isEnd: false, isPredicted: true"]}
+{"_e":"metro:client_log","_t":1791198331581,"level":"log","data":["[DEBUG] Processing date: 2026-10-14, isStart: false, isEnd: false, isPredicted: true"]}
+{"_e":"metro:client_log","_t":1791198331581,"level":"log","data":["[DEBUG] Processing date: 2026-10-19, isStart: true, isEnd: false, isPredicted: false"]}
+{"_e":"metro:client_log","_t":1791198331581,"level":"log","data":["[DEBUG] Processing date: 2026-10-20, isStart: false, isEnd: false, isPredicted: false"]}
+{"_e":"metro:client_log","_t":1791198331581,"level":"log","data":["[DEBUG] Processing date: 2026-10-21, isStart: false, isEnd: false, isPredicted: false"]}
+{"_e":"metro:client_log","_t":1791198331581,"level":"log","data":["[DEBUG] Processing date: 2026-10-22, isStart: false, isEnd: false, isPredicted: false"]}
+{"_e":"metro:client_log","_t":1791198331581,"level":"log","data":["[DEBUG] Processing date: 2026-10-23, isStart: false, isEnd: true, isPredicted: false"]}
+{"_e":"metro:client_log","_t":1791198366118,"level":"log","data":["[DEBUG] Processing date: 2026-10-12, isStart: true, isEnd: false, isPredicted: true, current === end: false"]}
+{"_e":"metro:client_log","_t":1791198366128,"level":"log","data":["[DEBUG] Processing date: 2026-10-13, isStart: false, isEnd: false, isPredicted: true, current === end: false"]}
+{"_e":"metro:client_log","_t":1791198366128,"level":"log","data":["[DEBUG] Processing date: 2026-10-14, isStart: false, isEnd: false, isPredicted: true, current === end: false"]}
+{"_e":"metro:client_log","_t":1791198366128,"level":"log","data":["[DEBUG] Processing date: 2026-10-19, isStart: true, isEnd: false, isPredicted: false, current === end: false"]}
+{"_e":"metro:client_log","_t":1791198366128,"level":"log","data":["[DEBUG] Processing date: 2026-10-20, isStart: false, isEnd: false, isPredicted: false, current === end: false"]}
+{"_e":"metro:client_log","_t":1791198366128,"level":"log","data":["[DEBUG] Processing date: 2026-10-21, isStart: false, isEnd: false, isPredicted: false, current === end: false"]}
+{"_e":"metro:client_log","_t":1791198366128,"level":"log","data":["[DEBUG] Processing date: 2026-10-22, isStart: false, isEnd: false, isPredicted: false, current === end: false"]}
+{"_e":"metro:client_log","_t":1791198366128,"level":"log","data":["[DEBUG] Processing date: 2026-10-23, isStart: false, isEnd: true, isPredicted: false, current === end: false"]}
+{"_e":"metro:client_log","_t":1791198366237,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1791198366243,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-10-23\", \"id\": 1, \"notes\": null, \"predictedCycleTime\": 4, \"startDate\": \"2026-10-19\"}, {\"endDate\": null, \"id\": 2, \"notes\": null, \"predictedCycleTime\": 2, \"startDate\": \"2026-10-12\"}]"]}
+{"_e":"metro:client_log","_t":1791198366243,"level":"log","data":["[DEBUG] Processing date: 2026-10-12, isStart: true, isEnd: false, isPredicted: true, current === end: false"]}
+{"_e":"metro:client_log","_t":1791198366243,"level":"log","data":["[DEBUG] Processing date: 2026-10-13, isStart: false, isEnd: false, isPredicted: true, current === end: false"]}
+{"_e":"metro:client_log","_t":1791198366243,"level":"log","data":["[DEBUG] Processing date: 2026-10-14, isStart: false, isEnd: false, isPredicted: true, current === end: false"]}
+{"_e":"metro:client_log","_t":1791198366243,"level":"log","data":["[DEBUG] Processing date: 2026-10-19, isStart: true, isEnd: false, isPredicted: false, current === end: false"]}
+{"_e":"metro:client_log","_t":1791198366243,"level":"log","data":["[DEBUG] Processing date: 2026-10-20, isStart: false, isEnd: false, isPredicted: false, current === end: false"]}
+{"_e":"metro:client_log","_t":1791198366243,"level":"log","data":["[DEBUG] Processing date: 2026-10-21, isStart: false, isEnd: false, isPredicted: false, current === end: false"]}
+{"_e":"metro:client_log","_t":1791198366243,"level":"log","data":["[DEBUG] Processing date: 2026-10-22, isStart: false, isEnd: false, isPredicted: false, current === end: false"]}
+{"_e":"metro:client_log","_t":1791198366243,"level":"log","data":["[DEBUG] Processing date: 2026-10-23, isStart: false, isEnd: true, isPredicted: false, current === end: false"]}
+{"_e":"metro:client_log","_t":1791198410445,"level":"log","data":["[DEBUG] Processing date: 2026-10-12, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198410451,"level":"log","data":["[DEBUG] Processing date: 2026-10-13, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198410451,"level":"log","data":["[DEBUG] Processing date: 2026-10-14, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198410451,"level":"log","data":["[DEBUG] Processing date: 2026-10-19, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198410451,"level":"log","data":["[DEBUG] Processing date: 2026-10-20, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198410451,"level":"log","data":["[DEBUG] Processing date: 2026-10-21, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198410451,"level":"log","data":["[DEBUG] Processing date: 2026-10-22, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198410451,"level":"log","data":["[DEBUG] Processing date: 2026-10-23, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198410561,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1791198410568,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-10-23\", \"id\": 1, \"notes\": null, \"predictedCycleTime\": 4, \"startDate\": \"2026-10-19\"}, {\"endDate\": null, \"id\": 2, \"notes\": null, \"predictedCycleTime\": 2, \"startDate\": \"2026-10-12\"}]"]}
+{"_e":"metro:client_log","_t":1791198410577,"level":"log","data":["[DEBUG] Processing date: 2026-10-12, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198410577,"level":"log","data":["[DEBUG] Processing date: 2026-10-13, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198410577,"level":"log","data":["[DEBUG] Processing date: 2026-10-14, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198410578,"level":"log","data":["[DEBUG] Processing date: 2026-10-19, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198410578,"level":"log","data":["[DEBUG] Processing date: 2026-10-20, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198410578,"level":"log","data":["[DEBUG] Processing date: 2026-10-21, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198410578,"level":"log","data":["[DEBUG] Processing date: 2026-10-22, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198410578,"level":"log","data":["[DEBUG] Processing date: 2026-10-23, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198428004,"level":"log","data":["[DEBUG] Processing date: 2026-10-12, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198428011,"level":"log","data":["[DEBUG] Processing date: 2026-10-13, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198428011,"level":"log","data":["[DEBUG] Processing date: 2026-10-14, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198428011,"level":"log","data":["[DEBUG] Processing date: 2026-10-19, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198428011,"level":"log","data":["[DEBUG] Processing date: 2026-10-20, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198428011,"level":"log","data":["[DEBUG] Processing date: 2026-10-21, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198428011,"level":"log","data":["[DEBUG] Processing date: 2026-10-22, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198428011,"level":"log","data":["[DEBUG] Processing date: 2026-10-23, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198428126,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1791198428134,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-10-23\", \"id\": 1, \"notes\": null, \"predictedCycleTime\": 4, \"startDate\": \"2026-10-19\"}, {\"endDate\": null, \"id\": 2, \"notes\": null, \"predictedCycleTime\": 2, \"startDate\": \"2026-10-12\"}]"]}
+{"_e":"metro:client_log","_t":1791198428134,"level":"log","data":["[DEBUG] Processing date: 2026-10-12, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198428134,"level":"log","data":["[DEBUG] Processing date: 2026-10-13, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198428134,"level":"log","data":["[DEBUG] Processing date: 2026-10-14, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198428134,"level":"log","data":["[DEBUG] Processing date: 2026-10-19, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198428134,"level":"log","data":["[DEBUG] Processing date: 2026-10-20, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198428134,"level":"log","data":["[DEBUG] Processing date: 2026-10-21, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198428134,"level":"log","data":["[DEBUG] Processing date: 2026-10-22, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198428134,"level":"log","data":["[DEBUG] Processing date: 2026-10-23, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198429700,"level":"log","data":["[DEBUG] Processing date: 2026-10-12, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198429709,"level":"log","data":["[DEBUG] Processing date: 2026-10-13, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198429710,"level":"log","data":["[DEBUG] Processing date: 2026-10-14, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198429710,"level":"log","data":["[DEBUG] Processing date: 2026-10-19, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198429710,"level":"log","data":["[DEBUG] Processing date: 2026-10-20, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198429710,"level":"log","data":["[DEBUG] Processing date: 2026-10-21, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198429710,"level":"log","data":["[DEBUG] Processing date: 2026-10-22, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198429710,"level":"log","data":["[DEBUG] Processing date: 2026-10-23, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198429820,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1791198429829,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-10-23\", \"id\": 1, \"notes\": null, \"predictedCycleTime\": 4, \"startDate\": \"2026-10-19\"}, {\"endDate\": null, \"id\": 2, \"notes\": null, \"predictedCycleTime\": 2, \"startDate\": \"2026-10-12\"}]"]}
+{"_e":"metro:client_log","_t":1791198429829,"level":"log","data":["[DEBUG] Processing date: 2026-10-12, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198429829,"level":"log","data":["[DEBUG] Processing date: 2026-10-13, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198429829,"level":"log","data":["[DEBUG] Processing date: 2026-10-14, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198429829,"level":"log","data":["[DEBUG] Processing date: 2026-10-19, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198429829,"level":"log","data":["[DEBUG] Processing date: 2026-10-20, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198429829,"level":"log","data":["[DEBUG] Processing date: 2026-10-21, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198429829,"level":"log","data":["[DEBUG] Processing date: 2026-10-22, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198429829,"level":"log","data":["[DEBUG] Processing date: 2026-10-23, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198439440,"level":"log","data":["[DEBUG] Processing date: 2026-10-12, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198439447,"level":"log","data":["[DEBUG] Processing date: 2026-10-13, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198439447,"level":"log","data":["[DEBUG] Processing date: 2026-10-14, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198439447,"level":"log","data":["[DEBUG] Processing date: 2026-10-19, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198439447,"level":"log","data":["[DEBUG] Processing date: 2026-10-20, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198439447,"level":"log","data":["[DEBUG] Processing date: 2026-10-21, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198439447,"level":"log","data":["[DEBUG] Processing date: 2026-10-22, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198439447,"level":"log","data":["[DEBUG] Processing date: 2026-10-23, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198441008,"level":"log","data":["[DEBUG] Processing date: 2026-10-12, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198441015,"level":"log","data":["[DEBUG] Processing date: 2026-10-13, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198441015,"level":"log","data":["[DEBUG] Processing date: 2026-10-14, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198441015,"level":"log","data":["[DEBUG] Processing date: 2026-10-19, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198441015,"level":"log","data":["[DEBUG] Processing date: 2026-10-20, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198441015,"level":"log","data":["[DEBUG] Processing date: 2026-10-21, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198441015,"level":"log","data":["[DEBUG] Processing date: 2026-10-22, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198441015,"level":"log","data":["[DEBUG] Processing date: 2026-10-23, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198441518,"level":"log","data":["[DEBUG] Processing date: 2026-10-12, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198441526,"level":"log","data":["[DEBUG] Processing date: 2026-10-13, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198441526,"level":"log","data":["[DEBUG] Processing date: 2026-10-14, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198441526,"level":"log","data":["[DEBUG] Processing date: 2026-10-19, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198441526,"level":"log","data":["[DEBUG] Processing date: 2026-10-20, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198441526,"level":"log","data":["[DEBUG] Processing date: 2026-10-21, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198441526,"level":"log","data":["[DEBUG] Processing date: 2026-10-22, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198441526,"level":"log","data":["[DEBUG] Processing date: 2026-10-23, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198471935,"level":"log","data":["[DEBUG] Processing date: 2026-10-12, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198471941,"level":"log","data":["[DEBUG] Processing date: 2026-10-13, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198471941,"level":"log","data":["[DEBUG] Processing date: 2026-10-14, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198471941,"level":"log","data":["[DEBUG] Processing date: 2026-10-19, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198471942,"level":"log","data":["[DEBUG] Processing date: 2026-10-20, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198471942,"level":"log","data":["[DEBUG] Processing date: 2026-10-21, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198471942,"level":"log","data":["[DEBUG] Processing date: 2026-10-22, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198471942,"level":"log","data":["[DEBUG] Processing date: 2026-10-23, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198473568,"level":"log","data":["[DEBUG] Processing date: 2026-10-12, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198473576,"level":"log","data":["[DEBUG] Processing date: 2026-10-13, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198473576,"level":"log","data":["[DEBUG] Processing date: 2026-10-14, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198473576,"level":"log","data":["[DEBUG] Processing date: 2026-10-19, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198473576,"level":"log","data":["[DEBUG] Processing date: 2026-10-20, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198473576,"level":"log","data":["[DEBUG] Processing date: 2026-10-21, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198473576,"level":"log","data":["[DEBUG] Processing date: 2026-10-22, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198473576,"level":"log","data":["[DEBUG] Processing date: 2026-10-23, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198475237,"level":"log","data":["[DEBUG] Processing date: 2026-10-12, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198475243,"level":"log","data":["[DEBUG] Processing date: 2026-10-13, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198475244,"level":"log","data":["[DEBUG] Processing date: 2026-10-14, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198475244,"level":"log","data":["[DEBUG] Processing date: 2026-10-19, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198475244,"level":"log","data":["[DEBUG] Processing date: 2026-10-20, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198475244,"level":"log","data":["[DEBUG] Processing date: 2026-10-21, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198475244,"level":"log","data":["[DEBUG] Processing date: 2026-10-22, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198475244,"level":"log","data":["[DEBUG] Processing date: 2026-10-23, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198476909,"level":"log","data":["[DEBUG] Processing date: 2026-10-12, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198476917,"level":"log","data":["[DEBUG] Processing date: 2026-10-13, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198476917,"level":"log","data":["[DEBUG] Processing date: 2026-10-14, end : 2026-10-14"]}
+{"_e":"metro:client_log","_t":1791198476917,"level":"log","data":["[DEBUG] Processing date: 2026-10-19, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198476917,"level":"log","data":["[DEBUG] Processing date: 2026-10-20, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198476917,"level":"log","data":["[DEBUG] Processing date: 2026-10-21, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198476917,"level":"log","data":["[DEBUG] Processing date: 2026-10-22, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198476917,"level":"log","data":["[DEBUG] Processing date: 2026-10-23, end : 2026-10-23"]}
+{"_e":"metro:client_log","_t":1791198574310,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1791198574317,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-10-23\", \"id\": 1, \"notes\": null, \"predictedCycleTime\": 4, \"startDate\": \"2026-10-19\"}, {\"endDate\": null, \"id\": 2, \"notes\": null, \"predictedCycleTime\": 2, \"startDate\": \"2026-10-12\"}]"]}
+{"_e":"metro:bundling:started","_t":1791198633130,"id":"j","platform":"android","environment":null,"entry":"node_modules/expo-router/entry.js"}
+{"_e":"metro:bundling:progress","_t":1791198633130,"id":"j","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1791198633211,"id":"j","total":1,"ms":81.277208}
+{"_e":"metro:client_log","_t":1791198641015,"level":"log","data":["Current database version: 1"]}
+{"_e":"metro:client_log","_t":1791198641023,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1791198641048,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-10-23\", \"id\": 1, \"notes\": null, \"predictedCycleTime\": 4, \"startDate\": \"2026-10-19\"}, {\"endDate\": null, \"id\": 2, \"notes\": null, \"predictedCycleTime\": 2, \"startDate\": \"2026-10-12\"}]"]}
+{"_e":"metro:client_log","_t":1791198670867,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1791198670984,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-10-23\", \"id\": 1, \"notes\": null, \"predictedCycleTime\": 4, \"startDate\": \"2026-10-19\"}, {\"endDate\": null, \"id\": 2, \"notes\": null, \"predictedCycleTime\": 2, \"startDate\": \"2026-10-12\"}]"]}
+{"_e":"metro:client_log","_t":1791198696931,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1791198697005,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-10-23\", \"id\": 1, \"notes\": null, \"predictedCycleTime\": 4, \"startDate\": \"2026-10-19\"}, {\"endDate\": null, \"id\": 2, \"notes\": null, \"predictedCycleTime\": 2, \"startDate\": \"2026-10-12\"}, {\"endDate\": null, \"id\": 3, \"notes\": null, \"predictedCycleTime\": 3, \"startDate\": \"2026-10-05\"}]"]}
+{"_e":"metro:client_log","_t":1791198732034,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1791198732180,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-10-23\", \"id\": 1, \"notes\": null, \"predictedCycleTime\": 4, \"startDate\": \"2026-10-19\"}, {\"endDate\": \"2026-10-15\", \"id\": 2, \"notes\": null, \"predictedCycleTime\": 2, \"startDate\": \"2026-10-12\"}]"]}
