@@ -1,7 +1,7 @@
 import { ThemedView } from '@/components/themed-view';
 import { useTheme } from '@/hooks/use-theme';
 import { useEffect, useState } from 'react';
-import { Modal, StyleSheet, TextInput, View } from 'react-native';
+import { Modal, ScrollView, StyleSheet, TextInput, View } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import { addCycleInDb, deleteCycleInDb, getAllCyclesInDb, resetCyclesInDb, updateCycleInDb } from '../db/cycles';
 import { getDb, recreateCyclesTable } from '../db/database';
@@ -33,6 +33,7 @@ export default function TestCycles() {
   };
 
   const AddOrUpdateCycle = async () => {
+    console.log('Adding or updating cycle with form data:', { formId, formStartDate, formEndDate, formNotes, formPredictedCycleTime });
     if (!formStartDate) return;
     var cycle: Cycle = { id: formId!, startDate: formStartDate, endDate: formEndDate || null, notes: formNotes || null, predictedCycleTime:formPredictedCycleTime || 0 };
     if (formId) {
@@ -83,6 +84,25 @@ export default function TestCycles() {
       startDate: startDate.toISOString().split('T')[0],
       endDate: endDate.toISOString().split('T')[0],
     };
+  };
+
+  const markAsToday = async (cycle: Cycle) => {
+    const today = new Date().toISOString().split('T')[0];
+    const updated: Cycle = { ...cycle, endDate: today };
+    await updateCycleInDb(updated);
+    const list = await getAllCyclesInDb();
+    setCycles(list);
+    setSelectedCycle(list.find(c => c.id === cycle.id) ?? null);
+  };
+
+  const markAsPredicted = async (cycle: Cycle) => {
+    const predictEndDate = new Date(cycle.startDate);
+    predictEndDate.setDate(predictEndDate.getDate() + (cycle.predictedCycleTime));
+    const updated: Cycle = { ...cycle, endDate: predictEndDate.toISOString().split('T')[0] };
+    await updateCycleInDb(updated);
+    const list = await getAllCyclesInDb();
+    setCycles(list);
+    setSelectedCycle(list.find(c => c.id === cycle.id) ?? null);
   };
 
   const makeMarkedDates = () => {
@@ -204,51 +224,104 @@ export default function TestCycles() {
                 setSelectedDate(day.dateString);
             }}
         />
-        <ThemedView 
-            style={styles.selectedCycleView}
+        <ScrollView
+            style={styles.selectedCycleScroll}
+            contentContainerStyle={styles.selectedCycleContent}
+            showsVerticalScrollIndicator={false}
+            keyboardShouldPersistTaps="handled"
         >
-            {selectedCycle ? (
-                <>
-                    <ThemedText>
-                        Selected Cycle: {selectedCycle.startDate} - {selectedCycle.endDate ?? 'Ongoing'}
-                    </ThemedText>
-                    <ThemedText type="small" themeColor="textSecondary">
-                        Notes: {selectedCycle.notes ?? 'Empty'}
-                    </ThemedText>
-                    <ThemedButton 
-                        label="Modify Cycle" 
-                        type="primary" 
-                        onPress={openModal} 
-                    />
-                    
+            <ThemedView style={styles.selectedCycleView}>
+                {selectedCycle ? (
+                    <>
+                        <View style={styles.cycleInfoRow}>
+                            <ThemedText type="small" themeColor="textSecondary">Start</ThemedText>
+                            <ThemedText>{selectedCycle.startDate}</ThemedText>
+                        </View>
+
+                        <View style={styles.cycleInfoRow}>
+                            <ThemedText type="small" themeColor="textSecondary">End</ThemedText>
+                            <ThemedText>{selectedCycle.endDate ?? 'Ongoing'}</ThemedText>
+                        </View>
+
+                        <View style={styles.cycleInfoRow}>
+                            <ThemedText type="small" themeColor="textSecondary">
+                                {selectedCycle.endDate ? 'Real Duration' : 'Predicted Duration'}
+                            </ThemedText>
+                            <ThemedText>
+                                {selectedCycle.endDate
+                                    ? Math.max(
+                                        1,
+                                        Math.round(
+                                          (new Date(selectedCycle.endDate).getTime() - new Date(selectedCycle.startDate).getTime()) / 86_400_000
+                                        )
+                                      ) + 1
+                                    : (selectedCycle.predictedCycleTime + 1)} days
+                            </ThemedText>
+                        </View>
+
+                        <View style={styles.notesBlock}>
+                            <ThemedText type="small" themeColor="textSecondary">Notes</ThemedText>
+                            <ThemedText>{selectedCycle.notes ?? 'No notes'}</ThemedText>
+                        </View>
+
+                        <ThemedButton 
+                            label="Edit Cycle" 
+                            type="primary" 
+                            onPress={openModal} 
+                        />
+                    </>
+                ) : (
+                    <>
+                        <ThemedText>{selectedDate}</ThemedText>
+                        <ThemedButton 
+                            label="Add Cycle" 
+                            type="primary" 
+                            onPress={openModal} 
+                        />
+                    </>
+                )}
+
+                {selectedCycle && !selectedCycle?.endDate && (
+                    <>
+                        <ThemedButton
+                            label="Mark as Today"
+                            type="secondary"
+                            onPress={() => {
+                                if (selectedCycle) {
+                                    markAsToday(selectedCycle);
+                                }
+                            }}
+                        />
+
+                        <ThemedButton
+                            label="Mark as Predicted"
+                            type="secondary"
+                            onPress={() => {
+                                if (selectedCycle) {
+                                    markAsPredicted(selectedCycle);
+                                }
+                            }}
+                        />
+                    </>
+                )}
+
+                {selectedCycle && (
                     <ThemedButton
-                        label="Delete Cycle"
+                        label="Delete"
                         type="secondary"
                         onPress={() => {
-                            if (selectedCycle) {
-                                deleteCycle(selectedCycle);
-                            }
+                            deleteCycle(selectedCycle);
                         }}
                     />
-                </>
-            ) : (
-                <>
-                    <ThemedText>No cycle selected</ThemedText>
-                    <ThemedButton 
-                        label="Add Cycle" 
-                        type="primary" 
-                        onPress={openModal} 
-                    />
-                </>
-            )}
-
-        </ThemedView>
+                )}
+            </ThemedView>
+        </ScrollView>
 
         <Modal visible={modalVisible} transparent animationType="fade" onRequestClose={() => setModalVisible(false)}>
             <View style={styles.overlay}>
                 <ThemedView style={styles.modal}>
                     <ThemedText type="subtitle">New Cycle</ThemedText>
-                    <ThemedText type="small" themeColor="textSecondary">Start date (YYYY-MM-DD)</ThemedText>
+                    <ThemedText type="small" themeColor="textSecondary">Start Date (YYYY-MM-DD)</ThemedText>
                     <TextInput
                         style={[styles.input, { color: theme.text, borderColor: theme.backgroundSelected }]}
                         placeholderTextColor={theme.textSecondary}
@@ -256,7 +329,7 @@ export default function TestCycles() {
                         value={formStartDate}
                         onChangeText={setFormStartDate}
                     />
-                    <ThemedText type="small" themeColor="textSecondary">End date (optional)</ThemedText>
+                    <ThemedText type="small" themeColor="textSecondary">End Date (optional)</ThemedText>
                     <TextInput
                         style={[styles.input, { color: theme.text, borderColor: theme.backgroundSelected }]}
                         placeholderTextColor={theme.textSecondary}
@@ -297,13 +370,34 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         overflow: 'hidden',
     },
-    selectedCycleView: {
+    selectedCycleScroll: {
         marginTop: 20,
+        maxHeight: 220,
+    },
+    selectedCycleContent: {
+        paddingBottom: 12,
+    },
+    selectedCycleView: {
         padding: 10,
         borderWidth: 0.2,
         borderColor: '#e0e0e0',
         borderRadius: 10,
         overflow: 'hidden',
+        gap: 8,
+    },
+    cycleInfoRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        gap: 12,
+    },
+    notesBlock: {
+        gap: 4,
+        paddingTop: 4,
+    },
+    actionBlock: {
+        gap: 8,
+        marginTop: 8,
     },
     overlay: {
         flex: 1,
