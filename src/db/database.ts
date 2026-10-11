@@ -7,7 +7,8 @@ const CYCLES_TABLE_COLUMNS = `
   start_date TEXT NOT NULL UNIQUE,
   end_date TEXT,
   notes TEXT,
-  predicted_cycle_time INTEGER NOT NULL
+  predicted_cycle_time INTEGER NOT NULL,
+  is_predicted INTEGER NOT NULL
 `;
 
 // Ouvre la base une seule fois pour toute l'app

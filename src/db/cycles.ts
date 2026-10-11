@@ -22,7 +22,7 @@ function validate(c: NewCycle) {
 }
 
 const SELECT = `
-  SELECT id, start_date AS startDate, end_date AS endDate, notes, predicted_cycle_time AS predictedCycleTime
+  SELECT id, start_date AS startDate, end_date AS endDate, notes, predicted_cycle_time AS predictedCycleTime, is_predicted AS isPredicted
   FROM cycles
 `;
 
@@ -53,8 +53,8 @@ export async function addCycleInDb(c: NewCycle): Promise<number> {
   validate(c);
   const db = await getDb();
   const result = await db.runAsync(
-    'INSERT INTO cycles (start_date, end_date, notes, predicted_cycle_time) VALUES (?, ?, ?, ?)',
-    [c.startDate, c.endDate, c.notes, c.predictedCycleTime]
+    'INSERT INTO cycles (start_date, end_date, notes, predicted_cycle_time, is_predicted) VALUES (?, ?, ?, ?, ?)',
+    [c.startDate, c.endDate, c.notes, c.predictedCycleTime, c.isPredicted ? 1 : 0]
   );
   return result.lastInsertRowId;
 }
@@ -63,8 +63,8 @@ export async function updateCycleInDb(cycle: Cycle): Promise<void> {
   validate(cycle);
   const db = await getDb();
   await db.runAsync(
-    'UPDATE cycles SET start_date = ?, end_date = ?, notes = ?, predicted_cycle_time = ? WHERE id = ?',
-    [cycle.startDate, cycle.endDate, cycle.notes, cycle.predictedCycleTime, cycle.id]
+    'UPDATE cycles SET start_date = ?, end_date = ?, notes = ?, predicted_cycle_time = ?, is_predicted = ? WHERE id = ?',
+    [cycle.startDate, cycle.endDate, cycle.notes, cycle.predictedCycleTime, cycle.isPredicted ? 1 : 0, cycle.id]
   );
 }
 
