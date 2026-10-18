@@ -177,7 +177,7 @@ export default function TestCycles() {
     }
     if (prediction) markRange(marks, prediction.startDate, prediction.endDate, () => theme.datePredicted);
     if (!marks[selectedDate]) {
-      marks[selectedDate] = { startingDay: true, endingDay: true, color: theme.dateSelection };
+      marks[selectedDate] = { startingDay: true, endingDay: true, color: '#5b8dee' };
     }
     return marks;
   }, [cycles, prediction, periodLength, selectedDate, theme]);
@@ -186,8 +186,11 @@ export default function TestCycles() {
     () => ({
       calendarBackground: theme.backgroundElement,
       textSectionTitleColor: theme.text,
-      todayTextColor: theme.dateRegistered,
-      todayBackgroundColor: theme.textInDate,
+      dayTextColor: theme.text,
+      textDisabledColor: theme.textSecondary,
+      // today: solid circle using the app text color so it's clearly distinct from period colors
+      todayTextColor: theme.backgroundElement,
+      todayBackgroundColor: theme.text,
       monthTextColor: theme.text,
       arrowColor: theme.dateRegistered,
     }),

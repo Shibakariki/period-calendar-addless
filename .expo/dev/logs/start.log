@@ -2010,3 +2010,60 @@
 {"_e":"metro:client_log","_t":1792336715862,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-09-20\", \"id\": 9, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-09-16\"}, {\"endDate\": null, \"id\": 12, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-10-14\"}]"]}
 {"_e":"metro:client_log","_t":1792336788480,"level":"log","data":["Fetching all cycles from the database"]}
 {"_e":"metro:client_log","_t":1792336788486,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-09-20\", \"id\": 9, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-09-16\"}, {\"endDate\": null, \"id\": 12, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-10-14\"}]"]}
+{"_e":"metro:client_log","_t":1792336969984,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1792336969990,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-09-20\", \"id\": 9, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-09-16\"}, {\"endDate\": null, \"id\": 12, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-10-14\"}]"]}
+{"_e":"metro:client_log","_t":1792337182311,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1792337182325,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-09-20\", \"id\": 9, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-09-16\"}, {\"endDate\": null, \"id\": 12, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-10-14\"}]"]}
+{"_e":"metro:client_log","_t":1792337315630,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1792337315636,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-09-20\", \"id\": 9, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-09-16\"}, {\"endDate\": null, \"id\": 12, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-10-14\"}]"]}
+{"_e":"metro:client_log","_t":1792337349209,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1792337349371,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-09-20\", \"id\": 9, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-09-16\"}, {\"endDate\": null, \"id\": 12, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-10-14\"}]"]}
+{"_e":"metro:client_log","_t":1792337365695,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1792337365806,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-09-20\", \"id\": 9, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-09-16\"}, {\"endDate\": null, \"id\": 12, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-10-14\"}]"]}
+{"_e":"metro:client_log","_t":1792337397039,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1792337397047,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-09-20\", \"id\": 9, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-09-16\"}, {\"endDate\": null, \"id\": 12, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-10-14\"}]"]}
+{"_e":"metro:bundling:started","_t":1792337400775,"id":"c","platform":"android","environment":null,"entry":"node_modules/expo-router/entry.js"}
+{"_e":"metro:bundling:progress","_t":1792337400775,"id":"c","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1792337400871,"id":"c","total":1,"ms":96.073875}
+{"_e":"metro:bundling:started","_t":1792337406030,"id":"f","platform":"android","environment":null,"entry":"node_modules/expo-router/entry.js"}
+{"_e":"metro:bundling:progress","_t":1792337406030,"id":"f","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1792337406102,"id":"f","total":1,"ms":71.610792}
+{"_e":"metro:client_log","_t":1792337412467,"level":"log","data":["Current database version: 1"]}
+{"_e":"metro:client_log","_t":1792337412473,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1792337412502,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-09-20\", \"id\": 9, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-09-16\"}, {\"endDate\": null, \"id\": 12, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-10-14\"}]"]}
+{"_e":"metro:client_log","_t":1792337484686,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1792337484693,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-09-20\", \"id\": 9, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-09-16\"}, {\"endDate\": null, \"id\": 12, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-10-14\"}]"]}
+{"_e":"metro:client_log","_t":1792337510114,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1792337510123,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-09-20\", \"id\": 9, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-09-16\"}, {\"endDate\": null, \"id\": 12, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-10-14\"}]"]}
+{"_e":"metro:bundling:started","_t":1792337513966,"id":"g","platform":"android","environment":null,"entry":"node_modules/expo-router/entry.js"}
+{"_e":"metro:bundling:progress","_t":1792337513967,"id":"g","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1792337514056,"id":"g","total":1,"ms":89.091291}
+{"_e":"metro:client_log","_t":1792337521521,"level":"log","data":["Current database version: 1"]}
+{"_e":"metro:client_log","_t":1792337521559,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1792337521559,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-09-20\", \"id\": 9, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-09-16\"}, {\"endDate\": null, \"id\": 12, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-10-14\"}]"]}
+{"_e":"metro:client_log","_t":1792337665167,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1792337665175,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-09-20\", \"id\": 9, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-09-16\"}, {\"endDate\": null, \"id\": 12, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-10-14\"}]"]}
+{"_e":"metro:bundling:started","_t":1792337668245,"id":"h","platform":"android","environment":null,"entry":"node_modules/expo-router/entry.js"}
+{"_e":"metro:bundling:progress","_t":1792337668245,"id":"h","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1792337668335,"id":"h","total":1,"ms":90.316625}
+{"_e":"metro:client_log","_t":1792337675478,"level":"log","data":["Current database version: 1"]}
+{"_e":"metro:client_log","_t":1792337675486,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1792337675533,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-09-20\", \"id\": 9, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-09-16\"}, {\"endDate\": null, \"id\": 12, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-10-14\"}]"]}
+{"_e":"metro:client_log","_t":1792337710479,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1792337710487,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-09-20\", \"id\": 9, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-09-16\"}, {\"endDate\": null, \"id\": 12, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-10-14\"}]"]}
+{"_e":"metro:client_log","_t":1792337735467,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1792337735580,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-09-20\", \"id\": 9, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-09-16\"}, {\"endDate\": null, \"id\": 12, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-10-14\"}]"]}
+{"_e":"metro:client_log","_t":1792337746117,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1792337746229,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-09-20\", \"id\": 9, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-09-16\"}, {\"endDate\": null, \"id\": 12, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-10-14\"}]"]}
+{"_e":"metro:bundling:started","_t":1792337759559,"id":"i","platform":"android","environment":null,"entry":"node_modules/expo-router/entry.js"}
+{"_e":"metro:bundling:progress","_t":1792337759559,"id":"i","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1792337759647,"id":"i","total":1,"ms":88.255}
+{"_e":"metro:client_log","_t":1792337767110,"level":"log","data":["Current database version: 1"]}
+{"_e":"metro:client_log","_t":1792337767222,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1792337767222,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-09-20\", \"id\": 9, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-09-16\"}, {\"endDate\": null, \"id\": 12, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-10-14\"}]"]}
+{"_e":"metro:client_log","_t":1792337938225,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1792337938234,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-09-20\", \"id\": 9, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-09-16\"}, {\"endDate\": \"2026-10-18\", \"id\": 12, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-10-14\"}]"]}
+{"_e":"metro:client_log","_t":1792337942317,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1792337942432,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-09-20\", \"id\": 9, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-09-16\"}]"]}
+{"_e":"metro:client_log","_t":1792337954710,"level":"log","data":["Fetching all cycles from the database"]}
+{"_e":"metro:client_log","_t":1792337954821,"level":"log","data":["Cycles :","[{\"endDate\": \"2026-09-20\", \"id\": 9, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-09-16\"}, {\"endDate\": \"2026-10-18\", \"id\": 13, \"isPredicted\": 0, \"notes\": null, \"predictedCycleTime\": 0, \"startDate\": \"2026-10-14\"}]"]}
