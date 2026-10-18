@@ -1,7 +1,8 @@
 // TODO:
 // - Notifications
-// - Remake UI for better user experience
+// - Add selection of date with another calendar in modal form
 // - Add logo and animated opening screen
+// - Add statistics and charts for cycle tracking
 
 import { ThemedView } from '@/components/themed-view';
 import { useTheme } from '@/hooks/use-theme';
@@ -18,15 +19,14 @@ import { ThemedButton } from './themed-button';
 import { ThemedText } from './themed-text';
 
 const ERROR_COLOR = '#c0392b';
+const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 type Mark = { startingDay: boolean; endingDay: boolean; color: string };
 type FormState = { id: number | null; startDate: string; endDate: string; notes: string };
 
 const EMPTY_FORM: FormState = { id: null, startDate: '', endDate: '', notes: '' };
 
-// `predictedCycleTime` et `isPredicted` viennent de l'ancienne version : plus utilisés ici, mais toujours
-// présents dans le type Cycle et dans la table (colonnes NOT NULL, d'où ces valeurs neutres).
-// À supprimer quand vous nettoierez db/ (par une migration `user_version = 2`).
+// `predictedCycleTime` and `isPredicted` are legacy columns kept to avoid a schema migration.
 const makeCycle = (id: number, startDate: string, endDate: string | null, notes: string | null): Cycle => ({
   id,
   startDate,
@@ -36,13 +36,16 @@ const makeCycle = (id: number, startDate: string, endDate: string | null, notes:
   isPredicted: false,
 });
 
-// Ignore (sans planter) les lignes invalides laissées par d'anciens tests
 const isUsable = (c: Cycle) => isValidISODate(c.startDate) && (!c.endDate || isValidISODate(c.endDate));
 
 const formatDays = (n: number) => `${n} ${n === 1 ? 'day' : 'days'}`;
 
-// Colorie chaque jour de start à end (inclus). Les dates restent des chaînes 'YYYY-MM-DD' :
-// aucun new Date(), donc ni décalage de fuseau horaire ni problème d'heure d'été.
+// Timezone-safe ISO date formatter — no Date constructor, no UTC offset shift
+const fmtDate = (iso: string) => {
+  const [y, m, d] = iso.split('-').map(Number);
+  return `${MONTH_NAMES[m - 1]} ${d}, ${y}`;
+};
+
 function markRange(marks: Record<string, Mark>, start: string, end: string, color: (day: string) => string) {
   const last = Math.max(0, diffDays(end, start));
   for (let i = 0; i <= last; i++) {
@@ -64,14 +67,40 @@ function describeError(error: PeriodError): string {
   }
 }
 
-function InfoRow({ label, value }: { label: string; value: string }) {
+// ─── Presentational sub-components ───────────────────────────────────────────
+
+function StatusPill({ label, color }: { label: string; color: string }) {
   return (
-    <View style={styles.cycleInfoRow}>
-      <ThemedText type="small" themeColor="textSecondary">{label}</ThemedText>
-      <ThemedText>{value}</ThemedText>
+    <View style={[pillStyles.pill, { borderColor: color }]}>
+      <Text style={[pillStyles.text, { color }]}>{label}</Text>
     </View>
   );
 }
+
+const pillStyles = StyleSheet.create({
+  pill: {
+    alignSelf: 'flex-start',
+    paddingVertical: 3,
+    paddingHorizontal: 10,
+    borderRadius: 20,
+    borderWidth: 1.5,
+  },
+  text: { fontSize: 12, fontWeight: '600', letterSpacing: 0.3 },
+});
+
+function InfoRow({ label, value }: { label: string; value: string }) {
+  return (
+    <View style={infoRowStyles.row}>
+      <ThemedText type="small" themeColor="textSecondary" style={infoRowStyles.label}>{label}</ThemedText>
+      <ThemedText type="small">{value}</ThemedText>
+    </View>
+  );
+}
+
+const infoRowStyles = StyleSheet.create({
+  row: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 2 },
+  label: { flex: 1 },
+});
 
 export default function TestCycles() {
   const theme = useTheme();
@@ -131,6 +160,12 @@ export default function TestCycles() {
     !selectedCycle && prediction && selectedDate >= prediction.startDate && selectedDate <= prediction.endDate
       ? prediction
       : null;
+
+  // Cycle currently active today — drives the summary banner
+  const activeCycle = useMemo(
+    () => cycles.find(c => c.startDate <= today && displayEnd(c, periodLength) >= today) ?? null,
+    [cycles, today, periodLength],
+  );
 
   const markedDates = useMemo(() => {
     const marks: Record<string, Mark> = {};
@@ -213,7 +248,7 @@ export default function TestCycles() {
       { text: 'Delete', style: 'destructive', onPress: () => write(() => deleteCycleInDb(cycle.id)) },
     ]);
 
-  // --- Outils de debug (visibles seulement en développement) -----------------------
+  // --- Debug tools (dev only) ------------------------------------------------
 
   const logDbTables = async () => {
     const db = await getDb();
@@ -236,142 +271,273 @@ export default function TestCycles() {
       console.log('[DB] cycles table recreated');
     });
 
-  // --- Affichage -------------------------------------------------------------------
+  // --- Detail panel ----------------------------------------------------------
 
   const renderDetails = () => {
     if (selectedCycle) {
       const days = periodDays(selectedCycle);
+      const isOngoing = !selectedCycle.endDate;
+      const dayNum = diffDays(today, selectedCycle.startDate) + 1;
+      const estimatedEnd = displayEnd(selectedCycle, periodLength);
+      const canEndToday = isOngoing && selectedCycle.startDate <= today;
+      const canEndEstimated = isOngoing && estimatedEnd < today;
+
       return (
         <>
-          <InfoRow label="Start" value={selectedCycle.startDate} />
-          <InfoRow label="End" value={selectedCycle.endDate ?? 'Ongoing'} />
-          <InfoRow
-            label={days !== null ? 'Real Duration' : 'Expected Duration'}
-            value={formatDays(days ?? periodLength)}
-          />
-          <View style={styles.notesBlock}>
-            <ThemedText type="small" themeColor="textSecondary">Notes</ThemedText>
-            <ThemedText>{selectedCycle.notes ?? ''}</ThemedText>
+          <View style={styles.detailHeader}>
+            <StatusPill
+              label={isOngoing ? 'Ongoing' : 'Completed'}
+              color={isOngoing ? theme.datePredicted : theme.dateRegistered}
+            />
+            <ThemedText type="small" themeColor="textSecondary">
+              {selectedDate ? fmtDate(selectedDate) : ''}
+            </ThemedText>
+            <ThemedText type="small" themeColor="textSecondary">
+              {isOngoing ? `Day ${dayNum}` : formatDays(days ?? periodLength)}
+            </ThemedText>
           </View>
 
+          <View style={[styles.divider, { backgroundColor: theme.backgroundSelected }]} />
+
+          <InfoRow label="Started" value={fmtDate(selectedCycle.startDate)} />
+          <InfoRow
+            label={selectedCycle.endDate ? 'Ended' : 'Est. end'}
+            value={fmtDate(selectedCycle.endDate ?? estimatedEnd)}
+          />
+
+          {selectedCycle.notes ? (
+            <>
+              <View style={[styles.divider, { backgroundColor: theme.backgroundSelected }]} />
+              <ThemedText type="small" themeColor="textSecondary">Notes</ThemedText>
+              <ThemedText type="small">{selectedCycle.notes}</ThemedText>
+            </>
+          ) : null}
+
+          <View style={[styles.divider, { backgroundColor: theme.backgroundSelected }]} />
+
           <ThemedButton label="Edit Cycle" type="primary" onPress={() => openForm(selectedCycle)} />
-          {!selectedCycle.endDate && selectedCycle.startDate <= today && (
-            <ThemedButton label="Mark as Today" type="secondary" onPress={() => markAsToday(selectedCycle)} />
+
+          {(canEndToday || canEndEstimated) && (
+            <View style={styles.actionRow}>
+              {canEndToday && (
+                <ThemedButton
+                  label="End Today"
+                  type="secondary"
+                  style={styles.flex1}
+                  onPress={() => markAsToday(selectedCycle)}
+                />
+              )}
+              {canEndEstimated && (
+                <ThemedButton
+                  label="End Estimated"
+                  type="secondary"
+                  style={styles.flex1}
+                  onPress={() => markAsPredicted(selectedCycle)}
+                />
+              )}
+            </View>
           )}
-          {!selectedCycle.endDate && displayEnd(selectedCycle, periodLength) <= today && (
-            <ThemedButton
-              label="Mark as Predicted"
-              type="secondary"
-              onPress={() => markAsPredicted(selectedCycle)}
-            />
-          )}
-          <ThemedButton label="Delete" type="secondary" onPress={() => confirmDelete(selectedCycle)} />
+
+          <ThemedButton
+            label="Delete Cycle"
+            type="ghost"
+            themeColor="textSecondary"
+            onPress={() => confirmDelete(selectedCycle)}
+          />
         </>
       );
     }
 
     if (selectedPrediction) {
-      const canConfirm = selectedPrediction.startDate <= today; // on ne confirme pas des règles à venir
+      const canConfirm = selectedPrediction.startDate <= today;
       return (
         <>
-          <ThemedText type="small" themeColor="textSecondary">Predicted period</ThemedText>
-          <InfoRow label="Start" value={selectedPrediction.startDate} />
-          <InfoRow label="End" value={selectedPrediction.endDate} />
-          <InfoRow label="Predicted Duration" value={formatDays(selectedPrediction.periodLength)} />
-          <InfoRow label="Average Cycle" value={formatDays(selectedPrediction.cycleLength)} />
+          <View style={styles.detailHeader}>
+            <StatusPill label="Predicted" color={theme.datePredicted} />
+            <ThemedText type="small" themeColor="textSecondary">
+              {fmtDate(selectedDate)}
+            </ThemedText>
+            <ThemedText type="small" themeColor="textSecondary">
+              ~{formatDays(selectedPrediction.periodLength)}
+            </ThemedText>
+          </View>
 
-          {canConfirm && (
-            <ThemedButton
-              label="Mark as Predicted"
-              type="primary"
-              onPress={() => confirmPrediction(selectedPrediction)}
-            />
+          <View style={[styles.divider, { backgroundColor: theme.backgroundSelected }]} />
+
+          <InfoRow label="Expected start" value={fmtDate(selectedPrediction.startDate)} />
+          <InfoRow label="Expected end" value={fmtDate(selectedPrediction.endDate)} />
+
+          <View style={[styles.divider, { backgroundColor: theme.backgroundSelected }]} />
+
+          {canConfirm ? (
+            <View style={styles.actionRow}>
+              <ThemedButton
+                label="Confirm Period"
+                type="primary"
+                style={styles.flex1}
+                onPress={() => confirmPrediction(selectedPrediction)}
+              />
+              <ThemedButton
+                label="Add Manually"
+                type="secondary"
+                style={styles.flex1}
+                onPress={() => openForm(null)}
+              />
+            </View>
+          ) : (
+            <ThemedButton label="Add Cycle" type="primary" onPress={() => openForm(null)} />
           )}
-          <ThemedButton
-            label="Add Cycle"
-            type={canConfirm ? 'secondary' : 'primary'}
-            onPress={() => openForm(null)}
-          />
         </>
       );
     }
 
     return (
-      <>
-        <ThemedText>{selectedDate}</ThemedText>
+      <View style={styles.emptyState}>
+        <ThemedText type="small" themeColor="textSecondary">{fmtDate(selectedDate)}</ThemedText>
         <ThemedButton label="Add Cycle" type="primary" onPress={() => openForm(null)} />
-      </>
+      </View>
     );
   };
 
+  // --- Summary banner --------------------------------------------------------
+
+  const renderBanner = () => {
+    if (activeCycle) {
+      const estimatedEnd = displayEnd(activeCycle, periodLength);
+      const dayNum = diffDays(today, activeCycle.startDate) + 1;
+      return (
+        <View style={[styles.banner, { backgroundColor: theme.backgroundElement, borderLeftColor: theme.dateRegistered }]}>
+          <ThemedText type="smallBold">Period active · Day {dayNum}</ThemedText>
+          <ThemedText type="small" themeColor="textSecondary">
+            Started {fmtDate(activeCycle.startDate)}
+          </ThemedText>
+          <ThemedText type="small" themeColor="textSecondary">
+            {!activeCycle.endDate ? 'End estimated ' + fmtDate(estimatedEnd) : ''}
+          </ThemedText>
+        </View>
+      );
+    }
+    if (prediction) {
+      const daysUntil = diffDays(prediction.startDate, today);
+      const headline =
+        daysUntil < 0
+          ? `Period may have started · ${formatDays(Math.abs(daysUntil))} overdue`
+          : daysUntil === 0
+          ? 'Period expected today'
+          : `Next period in ${formatDays(daysUntil)}`;
+      return (
+        <View style={[styles.banner, { backgroundColor: theme.backgroundElement, borderLeftColor: theme.datePredicted }]}>
+          <ThemedText type="smallBold">{headline}</ThemedText>
+          <ThemedText type="small" themeColor="textSecondary">
+            Around {fmtDate(prediction.startDate)} · ~{prediction.cycleLength}-day cycle
+          </ThemedText>
+        </View>
+      );
+    }
+    return (
+      <View style={[styles.banner, { backgroundColor: theme.backgroundElement, borderLeftColor: theme.backgroundSelected }]}>
+        <ThemedText type="small" themeColor="textSecondary">Add your first cycle to get started</ThemedText>
+      </View>
+    );
+  };
+
+  // --- Render ----------------------------------------------------------------
+
   return (
-    <ThemedView style={styles.view}>
+    <ThemedView style={styles.screen}>
       {__DEV__ && (
         <View style={styles.devTools}>
           <ThemedButton label="Log DB" type="secondary" onPress={() => logDbTables().catch(console.error)} />
-          <ThemedButton label="Reset cycles" type="ghost" onPress={resetTable} />
-          <ThemedButton label="Recreate DB" type="ghost" onPress={recreateDb} />
+          <ThemedButton label="Reset" type="ghost" onPress={resetTable} />
+          <ThemedButton label="Recreate" type="ghost" onPress={recreateDb} />
         </View>
       )}
 
-      <Calendar
-        style={styles.calendar}
-        theme={calendarTheme}
-        markedDates={markedDates}
-        markingType="period"
-        onDayPress={day => setSelectedDate(day.dateString)}
-      />
-
       <ScrollView
-        style={styles.selectedCycleScroll}
-        contentContainerStyle={styles.selectedCycleContent}
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
+        contentContainerStyle={styles.scrollContent}
       >
-        <ThemedView style={styles.selectedCycleView}>{renderDetails()}</ThemedView>
+        {renderBanner()}
+
+        <Calendar
+          style={styles.card}
+          theme={calendarTheme}
+          markedDates={markedDates}
+          markingType="period"
+          onDayPress={day => setSelectedDate(day.dateString)}
+        />
+
+        <View style={styles.legend}>
+          <View style={styles.legendItem}>
+            <View style={[styles.legendDot, { backgroundColor: theme.dateRegistered }]} />
+            <ThemedText type="small" themeColor="textSecondary">Period</ThemedText>
+          </View>
+          <View style={styles.legendItem}>
+            <View style={[styles.legendDot, { backgroundColor: theme.datePredicted }]} />
+            <ThemedText type="small" themeColor="textSecondary">Estimated / Predicted</ThemedText>
+          </View>
+        </View>
+
+        <ThemedView style={[styles.card, styles.detailCard]}>
+          {renderDetails()}
+        </ThemedView>
       </ScrollView>
 
       <Modal visible={modalVisible} transparent animationType="fade" onRequestClose={() => setModalVisible(false)}>
         <View style={styles.overlay}>
-          <ThemedView style={styles.modal}>
+          <ThemedView style={[styles.card, styles.modal]}>
             <ThemedText type="subtitle">{form.id === null ? 'New Cycle' : 'Edit Cycle'}</ThemedText>
 
-            <ThemedText type="small" themeColor="textSecondary">Start Date (YYYY-MM-DD)</ThemedText>
-            <TextInput
-              style={[styles.input, { color: theme.text, borderColor: theme.backgroundSelected }]}
-              placeholderTextColor={theme.textSecondary}
-              placeholder="2026-09-01"
-              value={form.startDate}
-              onChangeText={startDate => updateForm({ startDate })}
-              maxLength={10}
-              autoCorrect={false}
-            />
+            <View style={styles.fieldGroup}>
+              <ThemedText type="small" themeColor="textSecondary">Start Date</ThemedText>
+              <TextInput
+                style={[styles.input, { color: theme.text, borderColor: theme.backgroundSelected, backgroundColor: theme.backgroundElement }]}
+                placeholderTextColor={theme.textSecondary}
+                placeholder="YYYY-MM-DD"
+                value={form.startDate}
+                onChangeText={startDate => updateForm({ startDate })}
+                maxLength={10}
+                autoCorrect={false}
+                keyboardType="numbers-and-punctuation"
+              />
+            </View>
 
-            <ThemedText type="small" themeColor="textSecondary">End Date (optional)</ThemedText>
-            <TextInput
-              style={[styles.input, { color: theme.text, borderColor: theme.backgroundSelected }]}
-              placeholderTextColor={theme.textSecondary}
-              placeholder="2026-09-05"
-              value={form.endDate}
-              onChangeText={endDate => updateForm({ endDate })}
-              maxLength={10}
-              autoCorrect={false}
-            />
+            <View style={styles.fieldGroup}>
+              <ThemedText type="small" themeColor="textSecondary">End Date (optional)</ThemedText>
+              <TextInput
+                style={[styles.input, { color: theme.text, borderColor: theme.backgroundSelected, backgroundColor: theme.backgroundElement }]}
+                placeholderTextColor={theme.textSecondary}
+                placeholder="YYYY-MM-DD"
+                value={form.endDate}
+                onChangeText={endDate => updateForm({ endDate })}
+                maxLength={10}
+                autoCorrect={false}
+                keyboardType="numbers-and-punctuation"
+              />
+            </View>
 
-            <ThemedText type="small" themeColor="textSecondary">Notes (optional)</ThemedText>
-            <TextInput
-              style={[styles.input, { color: theme.text, borderColor: theme.backgroundSelected }]}
-              placeholderTextColor={theme.textSecondary}
-              placeholder="..."
-              value={form.notes}
-              onChangeText={notes => updateForm({ notes })}
-            />
+            <View style={styles.fieldGroup}>
+              <ThemedText type="small" themeColor="textSecondary">Notes (optional)</ThemedText>
+              <TextInput
+                style={[styles.input, styles.notesInput, { color: theme.text, borderColor: theme.backgroundSelected, backgroundColor: theme.backgroundElement }]}
+                placeholderTextColor={theme.textSecondary}
+                placeholder="How are you feeling?"
+                value={form.notes}
+                onChangeText={notes => updateForm({ notes })}
+                multiline
+              />
+            </View>
 
-            {formError !== null && <Text style={styles.errorText}>{formError}</Text>}
+            {formError !== null && (
+              <View style={styles.errorBox}>
+                <Text style={styles.errorText}>{formError}</Text>
+              </View>
+            )}
 
             <View style={styles.modalActions}>
-              <ThemedButton label="Cancel" type="ghost" onPress={() => setModalVisible(false)} />
-              <ThemedButton label={form.id === null ? 'Add' : 'Save'} type="primary" onPress={saveForm} />
+              <ThemedButton label="Cancel" type="ghost" style={styles.flex1} onPress={() => setModalVisible(false)} />
+              <ThemedButton label={form.id === null ? 'Add' : 'Save'} type="primary" style={styles.flex1} onPress={saveForm} />
             </View>
           </ThemedView>
         </View>
@@ -381,44 +547,69 @@ export default function TestCycles() {
 }
 
 const styles = StyleSheet.create({
-  view: {
+  screen: {
     width: '100%',
   },
   devTools: {
     flexDirection: 'row',
     gap: 8,
-    marginBottom: 10,
+    marginBottom: 4,
   },
-  calendar: {
-    borderWidth: 0.2,
-    borderColor: '#e0e0e0',
+  scrollContent: {
+    gap: 12,
+    paddingBottom: 16,
+  },
+  banner: {
+    borderRadius: 10,
+    padding: 14,
+    borderLeftWidth: 4,
+    gap: 2,
+  },
+  card: {
     borderRadius: 10,
     overflow: 'hidden',
-  },
-  selectedCycleScroll: {
-    marginTop: 20,
-    maxHeight: 220,
-  },
-  selectedCycleContent: {
-    paddingBottom: 12,
-  },
-  selectedCycleView: {
-    padding: 10,
     borderWidth: 0.2,
     borderColor: '#e0e0e0',
-    borderRadius: 10,
-    overflow: 'hidden',
+  },
+  legend: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 20,
+  },
+  legendItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+  },
+  legendDot: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+  },
+  detailCard: {
+    padding: 16,
     gap: 8,
   },
-  cycleInfoRow: {
+  detailHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    gap: 12,
   },
-  notesBlock: {
-    gap: 4,
-    paddingTop: 4,
+  divider: {
+    height: 1,
+    width: '100%',
+  },
+  actionRow: {
+    flexDirection: 'row',
+    gap: 8,
+  },
+  flex1: {
+    flex: 1,
+  },
+  emptyState: {
+    alignItems: 'center',
+    gap: 12,
+    paddingVertical: 8,
   },
   overlay: {
     flex: 1,
@@ -430,17 +621,29 @@ const styles = StyleSheet.create({
   modal: {
     width: '100%',
     maxWidth: 400,
-    borderRadius: 12,
     padding: 24,
-    gap: 8,
+    gap: 4,
+  },
+  fieldGroup: {
+    gap: 4,
+    marginTop: 8,
   },
   input: {
     borderWidth: 1,
     borderRadius: 8,
     paddingHorizontal: 12,
-    paddingVertical: 8,
+    paddingVertical: 10,
     fontSize: 14,
-    marginBottom: 4,
+  },
+  notesInput: {
+    minHeight: 72,
+    textAlignVertical: 'top',
+  },
+  errorBox: {
+    backgroundColor: '#c0392b22',
+    borderRadius: 8,
+    padding: 10,
+    marginTop: 4,
   },
   errorText: {
     color: ERROR_COLOR,
@@ -448,8 +651,7 @@ const styles = StyleSheet.create({
   },
   modalActions: {
     flexDirection: 'row',
-    justifyContent: 'flex-end',
     gap: 8,
-    marginTop: 8,
+    marginTop: 12,
   },
 });
