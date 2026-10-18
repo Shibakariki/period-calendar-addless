@@ -1,5 +1,4 @@
 // TODO:
-// - Notifications
 // - Add selection of date with another calendar in modal form
 // - Add logo and animated opening screen
 // - Add statistics and charts for cycle tracking
@@ -15,6 +14,7 @@ import type { Cycle } from '../db/types';
 import type { PeriodError, Prediction } from '../logic/cycles';
 import { DEFAULT_PERIOD_LENGTH, displayEnd, periodDays, predictNextPeriod, validatePeriod } from '../logic/cycles';
 import { addDaysISO, diffDays, isValidISODate, todayISO } from '../logic/dates';
+import { requestNotificationPermission, rescheduleNotifications } from '../notifications/notifications';
 import { ThemedButton } from './themed-button';
 import { ThemedText } from './themed-text';
 
@@ -120,11 +120,16 @@ export default function TestCycles() {
     const usable = rows.filter(isUsable);
     if (usable.length < rows.length) console.warn(`[cycles] ${rows.length - usable.length} invalid row(s) ignored`);
     setCycles(usable);
+    rescheduleNotifications(usable).catch(console.error);
   }, []);
 
   useEffect(() => {
     reload().catch(console.error);
   }, [reload]);
+
+  useEffect(() => {
+    requestNotificationPermission().catch(console.error);
+  }, []);
 
   const alertFailure = () => Alert.alert('Not saved', 'The change could not be saved. Try again.');
 
